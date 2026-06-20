@@ -1,0 +1,30 @@
+[
+  {
+    "timestamp": "2026-06-20T21:30:00Z",
+    "agents": 126,
+    "feedback": 1244,
+    "validations": "Coming Soon",
+    "last_indexed_block": 96593016,
+    "chain_head_block": null,
+    "identity_registry_deployed": null,
+    "reputation_registry_deployed": null,
+    "rpc_endpoint": null,
+    "onchain_agent_count": null,
+    "indexer_vs_onchain_diff": null,
+    "notes": "Seeded from verified Quicknode fetch. Earlier fetch (~15-20 min prior) showed 108/633 \u2014 indexer was likely mid-backfill."
+  },
+  {
+    "timestamp": "2026-06-20T23:13:58.913191Z",
+    "agents": 138,
+    "feedback": 1535,
+    "validations": "Coming Soon",
+    "last_indexed_block": 96933446,
+    "chain_head_block": 96933463,
+    "identity_registry_deployed": true,
+    "reputation_registry_deployed": true,
+    "rpc_endpoint": "https://rpc.mantle.xyz",
+    "onchain_agent_count": null,
+    "indexer_vs_onchain_diff": null,
+    "notes": ""
+  }
+]

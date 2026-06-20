@@ -1,0 +1,3 @@
+timestamp,agents,feedback,validations,last_indexed_block,chain_head_block,identity_registry_deployed,reputation_registry_deployed,rpc_endpoint,onchain_agent_count,indexer_vs_onchain_diff,notes
+2026-06-20T21:30:00Z,126,1244,Coming Soon,96593016,,,,,,,"Seeded from verified Quicknode fetch. Earlier fetch (~15-20 min prior) showed 108/633 — indexer was likely mid-backfill."
+2026-06-20T23:13:58.913191Z,138,1535,Coming Soon,96933446,96933463,True,True,https://rpc.mantle.xyz,,,
