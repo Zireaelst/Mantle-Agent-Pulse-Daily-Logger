@@ -118,9 +118,11 @@ mantle-agent-pulse/
 | `python logger.py` | Daily snapshot: scrape + RPC check + peer comparison + ADI |
 | `python logger.py --full-verify` | + independent on-chain agent recount |
 | `python logger.py --report` | Generate Markdown report with charts |
+| `python logger.py --status` | Fast pre-submission health check (total rows, gaps, streak) |
 | `python logger.py --register-agent` | Register on ERC-8004 (costs gas!) |
 | `python logger.py --peers-only` | Only scrape peer chains |
 | `python logger.py -v` | Verbose/debug output |
+| `python analysis.py` | Generate trend summary (`reports/trend_summary.md`) |
 
 ---
 
@@ -155,35 +157,33 @@ than a chain with 10,000 agents and $5B TVL (ADI = 2.0).
 
 ---
 
-## Scheduler Setup (Cron / Task Scheduler)
+## Scheduler Setup (macOS LaunchAgent)
 
-### Linux / macOS (cron)
+The daily logger is configured to run automatically using macOS `launchd`, which is more reliable than `cron` (if the Mac is asleep at the scheduled time, `RunAtLoad` ensures it runs when it wakes).
 
-Run `crontab -e` and add:
-
-```cron
-# Mantle Agent Pulse — daily at 9:00 AM UTC
-0 9 * * * cd /full/path/to/Mantle-Agent-Pulse-Daily-Logger && /usr/bin/python3 logger.py >> run.log 2>&1
-```
-
-Replace `/full/path/to/` with the actual path. To find it:
-
+### Setup & Registration
+A LaunchAgent plist file `com.mantleagentpulse.dailylogger.plist` was created in `~/Library/LaunchAgents/`.
+To load it:
 ```bash
-cd Mantle-Agent-Pulse-Daily-Logger && pwd
+launchctl load -w ~/Library/LaunchAgents/com.mantleagentpulse.dailylogger.plist
 ```
 
-### Windows (Task Scheduler)
+### Checking Status
+To verify the agent is registered and running:
+```bash
+launchctl list | grep mantleagentpulse
+```
 
-1. Open **Task Scheduler** → Create Basic Task
-2. **Name**: Mantle Agent Pulse
-3. **Trigger**: Daily, 9:00 AM
-4. **Action**: Start a program
-   - **Program**: `python` (or full path to `python.exe`)
-   - **Arguments**: `logger.py`
-   - **Start in**: `C:\full\path\to\Mantle-Agent-Pulse-Daily-Logger`
-5. Check "Open the Properties dialog" and:
-   - Under **General** → check "Run whether user is logged on or not"
-   - Under **Settings** → check "Run task as soon as possible after a scheduled start is missed"
+### Logs
+Stdout and stderr are NOT swallowed. You can inspect the logs at:
+- `logs/logger.out`
+- `logs/logger.err`
+
+### Unloading
+If you need to stop the scheduled task:
+```bash
+launchctl unload ~/Library/LaunchAgents/com.mantleagentpulse.dailylogger.plist
+```
 
 ---
 
@@ -243,24 +243,18 @@ genuine registration burst — which is precisely why `--full-verify` exists.
 
 ---
 
-## Design Decisions
+## Design Decisions & Phase 2 Features
 
-- **HTML scraping over REST API**: The ERC-8004 Explorer's REST API is paywalled
-  (x402, $0.001 USDC/request on Base). The website UI is explicitly documented as
-  free. We parse the public HTML pages instead.
-
-- **Adaptive chunk shrinking**: `eth_getLogs` calls start with large block ranges
-  and automatically halve when the RPC returns "too many results" errors. This
-  works reliably across different RPC providers with different limits.
-
-- **Binary search for start block**: Rather than hardcoding a start block number
-  (which would be fragile), we binary-search for the block at the target date.
-
-- **APPEND-only logging**: The CSV/JSON files are never overwritten, only appended.
-  The seed row is preserved.
-
-- **No fabricated data**: If any source fails, we log `null`/`None` with a note
-  explaining what failed. Never fabricate a data point.
+- **macOS launchd Scheduling**: Ensures reliable daily execution even if the machine sleeps, avoiding silent failures common with cron.
+- **Git-based Data Integrity**: After every successful daily run, a `git commit` is automatically made with the new data snapshot, creating a tamper-evident history.
+- **Data Gap Detection**: `logger.py` self-audits before running. If >36 hours have elapsed since the last log, it writes a `gap_detected` row. Missing data is preserved as an honest methodology note rather than silently ignored.
+- **Run-Failure Alerting**: If a scheduled run fails due to network or scraping issues, a local macOS notification (`osascript`) is triggered.
+- **x402 Volume Limitation**: Tracking Questflow SANTA multichain facilitator volume was attempted but failed due to lack of a public, verified contract address. This is documented transparently in `x402_data_unavailable.md`.
+- **HTML scraping over REST API**: The ERC-8004 Explorer's REST API is paywalled (x402). The website UI is explicitly documented as free. We parse the public HTML pages instead.
+- **Adaptive chunk shrinking**: `eth_getLogs` calls start with large block ranges and automatically halve when the RPC returns "too many results" errors. This works reliably across different RPC providers with different limits.
+- **Binary search for start block**: Rather than hardcoding a start block number, we binary-search for the block at the target date.
+- **APPEND-only logging**: The CSV/JSON files are never overwritten, only appended. The seed row is preserved.
+- **No fabricated data**: If any source fails, we log `null`/`None` with a note explaining what failed. Never fabricate a data point.
 
 ---
 

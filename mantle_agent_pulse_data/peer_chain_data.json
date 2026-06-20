@@ -448,5 +448,155 @@
     "validations": "Coming Soon",
     "last_indexed_block": 24431698,
     "chain_id": 1868
+  },
+  {
+    "timestamp": "2026-06-20T23:33:00.848358Z",
+    "network_slug": "abstract-mainnet",
+    "network_name": "Abstract Mainnet",
+    "agents": 1067,
+    "feedback": 292,
+    "validations": "Coming Soon",
+    "last_indexed_block": 71130977,
+    "chain_id": 2741
+  },
+  {
+    "timestamp": "2026-06-20T23:33:00.848358Z",
+    "network_slug": "arbitrum-mainnet",
+    "network_name": "Arbitrum One",
+    "agents": 1125,
+    "feedback": 107,
+    "validations": "Coming Soon",
+    "last_indexed_block": 475625232,
+    "chain_id": 42161
+  },
+  {
+    "timestamp": "2026-06-20T23:33:00.848358Z",
+    "network_slug": "avalanche-mainnet",
+    "network_name": "Avalanche C-Chain",
+    "agents": 1770,
+    "feedback": 14374,
+    "validations": "Coming Soon",
+    "last_indexed_block": 88467469,
+    "chain_id": 43114
+  },
+  {
+    "timestamp": "2026-06-20T23:33:00.848358Z",
+    "network_slug": "base-mainnet",
+    "network_name": "Base Mainnet",
+    "agents": 55938,
+    "feedback": 265830,
+    "validations": "Coming Soon",
+    "last_indexed_block": 47604504,
+    "chain_id": 8453
+  },
+  {
+    "timestamp": "2026-06-20T23:33:00.848358Z",
+    "network_slug": "bnb-mainnet",
+    "network_name": "BNB Chain Mainnet",
+    "agents": 139558,
+    "feedback": 29490,
+    "validations": "Coming Soon",
+    "last_indexed_block": 105422181,
+    "chain_id": 56
+  },
+  {
+    "timestamp": "2026-06-20T23:33:00.848358Z",
+    "network_slug": "celo-mainnet",
+    "network_name": "Celo Mainnet",
+    "agents": 9502,
+    "feedback": 23474,
+    "validations": "Coming Soon",
+    "last_indexed_block": 70097602,
+    "chain_id": 42220
+  },
+  {
+    "timestamp": "2026-06-20T23:33:00.848358Z",
+    "network_slug": "ethereum-mainnet",
+    "network_name": "Ethereum Mainnet",
+    "agents": 35245,
+    "feedback": 3180,
+    "validations": "Coming Soon",
+    "last_indexed_block": 25362094,
+    "chain_id": 1
+  },
+  {
+    "timestamp": "2026-06-20T23:33:00.848358Z",
+    "network_slug": "gnosis-mainnet",
+    "network_name": "Gnosis Mainnet",
+    "agents": 3759,
+    "feedback": 4341,
+    "validations": "Coming Soon",
+    "last_indexed_block": 46801449,
+    "chain_id": 100
+  },
+  {
+    "timestamp": "2026-06-20T23:33:00.848358Z",
+    "network_slug": "linea-mainnet",
+    "network_name": "Linea Mainnet",
+    "agents": 115,
+    "feedback": 31,
+    "validations": "Coming Soon",
+    "last_indexed_block": 31106428,
+    "chain_id": 59144
+  },
+  {
+    "timestamp": "2026-06-20T23:33:00.848358Z",
+    "network_slug": "mantle-mainnet",
+    "network_name": "Mantle Mainnet",
+    "agents": 139,
+    "feedback": 1537,
+    "validations": "Coming Soon",
+    "last_indexed_block": 96934017,
+    "chain_id": 5000
+  },
+  {
+    "timestamp": "2026-06-20T23:33:00.848358Z",
+    "network_slug": "monad-mainnet",
+    "network_name": "Monad Mainnet",
+    "agents": 8766,
+    "feedback": 9101,
+    "validations": "Coming Soon",
+    "last_indexed_block": 82622292,
+    "chain_id": 143
+  },
+  {
+    "timestamp": "2026-06-20T23:33:00.848358Z",
+    "network_slug": "optimism-mainnet",
+    "network_name": "OP Mainnet",
+    "agents": 516,
+    "feedback": 30,
+    "validations": "Coming Soon",
+    "last_indexed_block": 153199781,
+    "chain_id": 10
+  },
+  {
+    "timestamp": "2026-06-20T23:33:00.848358Z",
+    "network_slug": "polygon-mainnet",
+    "network_name": "Polygon Mainnet",
+    "agents": 556,
+    "feedback": 193,
+    "validations": "Coming Soon",
+    "last_indexed_block": 88862245,
+    "chain_id": 137
+  },
+  {
+    "timestamp": "2026-06-20T23:33:00.848358Z",
+    "network_slug": "scroll-mainnet",
+    "network_name": "Scroll Mainnet",
+    "agents": 108,
+    "feedback": 0,
+    "validations": "Coming Soon",
+    "last_indexed_block": 34140387,
+    "chain_id": 534352
+  },
+  {
+    "timestamp": "2026-06-20T23:33:00.848358Z",
+    "network_slug": "soneium-mainnet",
+    "network_name": "Soneium Mainnet",
+    "agents": 0,
+    "feedback": 0,
+    "validations": "Coming Soon",
+    "last_indexed_block": 24431799,
+    "chain_id": 1868
   }
 ]

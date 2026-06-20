@@ -43,7 +43,8 @@ import csv
 import json
 import argparse
 import logging
-from datetime import datetime, timezone
+import subprocess
+from datetime import datetime, timezone, timedelta
 from typing import Dict, Any, List, Optional
 
 from config import (
@@ -133,6 +134,61 @@ def append_json(filepath: str, row: Dict[str, Any]) -> None:
 
 # ─── Main Logger Flow ──────────────────────────────────────────────────────
 
+def fire_failure_notification(reason: str) -> None:
+    try:
+        script = f'display notification "Mantle Agent Pulse run failed: {reason}" with title "Mantle Agent Pulse"'
+        subprocess.run(["osascript", "-e", script], check=False)
+    except Exception:
+        pass
+
+def check_status() -> None:
+    """Print total rows, date range covered, detected gaps, and current streak length."""
+    if not os.path.exists(CSV_LOG_FILE):
+        print("No CSV log file found.")
+        return
+
+    with open(CSV_LOG_FILE, "r", encoding="utf-8") as f:
+        reader = list(csv.DictReader(f))
+    
+    total_rows = len(reader)
+    if total_rows == 0:
+        print("CSV log is empty.")
+        return
+
+    first_date = reader[0]["timestamp"]
+    last_date = reader[-1]["timestamp"]
+
+    # Calculate gaps and streak
+    gaps = []
+    streak = 1
+    
+    for i in range(1, len(reader)):
+        try:
+            prev_ts = datetime.fromisoformat(reader[i-1]["timestamp"].replace("Z", "+00:00"))
+            curr_ts = datetime.fromisoformat(reader[i]["timestamp"].replace("Z", "+00:00"))
+            delta = curr_ts - prev_ts
+            if delta > timedelta(hours=36):
+                gaps.append(f"Gap between {prev_ts.date()} and {curr_ts.date()} ({delta.days} days)")
+                streak = 1
+            else:
+                streak += 1
+        except Exception:
+            pass
+            
+        if "gap_detected" in reader[i].get("notes", ""):
+            pass
+
+    print(f"Total rows: {total_rows}")
+    print(f"Date range: {first_date} to {last_date}")
+    print(f"Current streak: {streak} days")
+    if gaps:
+        print("Detected gaps:")
+        for g in gaps:
+            print(f"  - {g}")
+    else:
+        print("No gaps detected.")
+
+
 def run_daily_snapshot(full_verify: bool = False) -> Dict[str, Any]:
     """
     Run the daily Mantle snapshot:
@@ -148,6 +204,38 @@ def run_daily_snapshot(full_verify: bool = False) -> Dict[str, Any]:
     timestamp = now.isoformat().replace("+00:00", "Z")
 
     logger.info(f"=== Mantle Agent Pulse — Daily Snapshot ({timestamp}) ===")
+
+
+    logger.info("Checking for data gaps...")
+    if os.path.exists(CSV_LOG_FILE):
+        with open(CSV_LOG_FILE, "r", encoding="utf-8") as f:
+            reader = list(csv.DictReader(f))
+            if reader:
+                last_row = reader[-1]
+                try:
+                    last_ts = datetime.fromisoformat(last_row["timestamp"].replace("Z", "+00:00"))
+                    delta = now - last_ts
+                    if delta > timedelta(hours=36):
+                        gap_days = delta.days
+                        gap_row = {
+                            "timestamp": (last_ts + timedelta(days=1)).isoformat().replace("+00:00", "Z"),
+                            "agents": last_row.get("agents"),
+                            "feedback": last_row.get("feedback"),
+                            "validations": last_row.get("validations"),
+                            "last_indexed_block": last_row.get("last_indexed_block"),
+                            "chain_head_block": last_row.get("chain_head_block"),
+                            "identity_registry_deployed": last_row.get("identity_registry_deployed"),
+                            "reputation_registry_deployed": last_row.get("reputation_registry_deployed"),
+                            "rpc_endpoint": last_row.get("rpc_endpoint"),
+                            "onchain_agent_count": last_row.get("onchain_agent_count"),
+                            "indexer_vs_onchain_diff": last_row.get("indexer_vs_onchain_diff"),
+                            "notes": f"gap_detected: missed {gap_days} days due to logger failure/downtime",
+                        }
+                        logger.warning(f"Gap detected! Logging missing {gap_days} days.")
+                        append_csv(CSV_LOG_FILE, gap_row, CSV_FIELDS)
+                        append_json(JSON_LOG_FILE, gap_row)
+                except ValueError:
+                    pass
 
     # ── Step 1: Scrape ERC-8004 explorer ────────────────────────────────
     logger.info("Step 1: Scraping ERC-8004 explorer for Mantle stats...")
@@ -172,6 +260,7 @@ def run_daily_snapshot(full_verify: bool = False) -> Dict[str, Any]:
     if stats.scrape_error:
         notes.append(f"Scrape error: {stats.scrape_error}")
         logger.warning(f"Scrape error: {stats.scrape_error}")
+        fire_failure_notification(stats.scrape_error)
 
     # ── Step 2: RPC sanity check ────────────────────────────────────────
     logger.info("Step 2: RPC sanity check...")
@@ -185,6 +274,7 @@ def run_daily_snapshot(full_verify: bool = False) -> Dict[str, Any]:
     if rpc_result.get("error"):
         notes.append(f"RPC error: {rpc_result['error']}")
         logger.warning(f"RPC error: {rpc_result['error']}")
+        fire_failure_notification(rpc_result['error'])
 
     # ── Step 3: Full verify (optional) ──────────────────────────────────
     if full_verify:
@@ -221,6 +311,23 @@ def run_daily_snapshot(full_verify: bool = False) -> Dict[str, Any]:
     logger.info("Step 4: Appending to CSV and JSON logs...")
     append_csv(CSV_LOG_FILE, row, CSV_FIELDS)
     append_json(JSON_LOG_FILE, row)
+
+
+    # ── Step 5: Git-based data integrity trail ──────────────────────────
+    logger.info("Step 5: Git-based data integrity trail...")
+    try:
+        if not os.path.exists(".git"):
+            subprocess.run(["git", "init"], check=True)
+            if os.path.exists(".gitignore"):
+                subprocess.run(["git", "add", ".gitignore"], check=True)
+        subprocess.run(["git", "add", CSV_LOG_FILE, JSON_LOG_FILE, PEER_CSV_FILE, PEER_JSON_FILE, ADI_CSV_FILE, ADI_JSON_FILE], check=False)
+        agents_val = row.get("agents", "N/A")
+        feedback_val = row.get("feedback", "N/A")
+        msg = f"data: snapshot {timestamp[:10]} — agents={agents_val} feedback={feedback_val} source=quicknode"
+        subprocess.run(["git", "commit", "-m", msg], check=False)
+        logger.info("Data committed to local git history.")
+    except Exception as e:
+        logger.error(f"Git integrity trail failed: {e}")
 
     # ── Print summary ────────────────────────────────────────────────────
     print(f"\n{'='*60}")
@@ -404,6 +511,11 @@ Examples:
         action="store_true",
         help="Enable debug logging",
     )
+    parser.add_argument(
+        "--status",
+        action="store_true",
+        help="Print fast pre-submission health check status",
+    )
 
     args = parser.parse_args()
     setup_logging(args.verbose)
@@ -414,6 +526,10 @@ Examples:
         register_agent()
         return
 
+    if args.status:
+        check_status()
+        return
+
     # Handle --report
     if args.report:
         report_path = generate_report()
@@ -422,7 +538,11 @@ Examples:
 
     # Normal flow: daily snapshot + peer comparison
     if not args.peers_only:
-        run_daily_snapshot(full_verify=args.full_verify)
+        try:
+            run_daily_snapshot(full_verify=args.full_verify)
+        except Exception as e:
+            fire_failure_notification(f"Unhandled exception: {e}")
+            raise
 
     # Always run peer comparison (unless explicitly peers_only + report only)
     run_peer_comparison()
