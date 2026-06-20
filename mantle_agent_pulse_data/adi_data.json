@@ -12,9 +12,9 @@
     "network_slug": "bnb-mainnet",
     "network_name": "BNB Chain Mainnet",
     "defillama_name": "BSC",
-    "agents": 139553,
+    "agents": 139556,
     "tvl_usd": 5128398431.98269,
-    "adi": 27.211809271622336,
+    "adi": 27.21239424957204,
     "error": null
   },
   {
@@ -39,9 +39,9 @@
     "network_slug": "mantle-mainnet",
     "network_name": "Mantle Mainnet",
     "defillama_name": "Mantle",
-    "agents": 138,
+    "agents": 139,
     "tvl_usd": 145367362.65131798,
-    "adi": 0.9493190045072941,
+    "adi": 0.9561981277283614,
     "error": null
   },
   {

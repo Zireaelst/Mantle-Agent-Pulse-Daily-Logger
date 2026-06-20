@@ -26,5 +26,33 @@
     "onchain_agent_count": null,
     "indexer_vs_onchain_diff": null,
     "notes": ""
+  },
+  {
+    "timestamp": "2026-06-20T23:29:48.546574Z",
+    "agents": 139,
+    "feedback": 1536,
+    "validations": "Coming Soon",
+    "last_indexed_block": 96933922,
+    "chain_head_block": 96933938,
+    "identity_registry_deployed": true,
+    "reputation_registry_deployed": true,
+    "rpc_endpoint": "https://rpc.mantle.xyz",
+    "onchain_agent_count": null,
+    "indexer_vs_onchain_diff": null,
+    "notes": ""
+  },
+  {
+    "timestamp": "2026-06-20T23:32:58.026084Z",
+    "agents": 139,
+    "feedback": 1537,
+    "validations": "Coming Soon",
+    "last_indexed_block": 96934017,
+    "chain_head_block": 96934033,
+    "identity_registry_deployed": true,
+    "reputation_registry_deployed": true,
+    "rpc_endpoint": "https://rpc.mantle.xyz",
+    "onchain_agent_count": null,
+    "indexer_vs_onchain_diff": null,
+    "notes": ""
   }
 ]
