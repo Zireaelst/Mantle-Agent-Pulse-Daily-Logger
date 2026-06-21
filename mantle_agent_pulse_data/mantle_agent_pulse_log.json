@@ -54,5 +54,33 @@
     "onchain_agent_count": null,
     "indexer_vs_onchain_diff": null,
     "notes": ""
+  },
+  {
+    "timestamp": "2026-06-20T23:16:58.031418Z",
+    "agents": 138,
+    "feedback": 1535,
+    "validations": "Coming Soon",
+    "last_indexed_block": 96933535,
+    "chain_head_block": 96933552,
+    "identity_registry_deployed": true,
+    "reputation_registry_deployed": true,
+    "rpc_endpoint": "https://rpc.mantle.xyz",
+    "onchain_agent_count": 138,
+    "indexer_vs_onchain_diff": 0,
+    "notes": "On-chain recount matches indexer exactly"
+  },
+  {
+    "timestamp": "2026-06-21T06:08:54.858360Z",
+    "agents": 139,
+    "feedback": 1550,
+    "validations": "Coming Soon",
+    "last_indexed_block": 96945897,
+    "chain_head_block": 96945911,
+    "identity_registry_deployed": true,
+    "reputation_registry_deployed": true,
+    "rpc_endpoint": "https://rpc.mantle.xyz",
+    "onchain_agent_count": null,
+    "indexer_vs_onchain_diff": null,
+    "notes": ""
   }
 ]
