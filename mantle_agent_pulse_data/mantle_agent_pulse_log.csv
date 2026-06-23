@@ -6,3 +6,4 @@ timestamp,agents,feedback,validations,last_indexed_block,chain_head_block,identi
 2026-06-20T23:16:58.031418Z,138,1535,Coming Soon,96933535,96933552,True,True,https://rpc.mantle.xyz,138,0,On-chain recount matches indexer exactly
 2026-06-21T06:08:54.858360Z,139,1550,Coming Soon,96945897,96945911,True,True,https://rpc.mantle.xyz,,,
 2026-06-22T06:02:15.173015Z,140,1590,Coming Soon,96988894,96988911,True,True,https://rpc.mantle.xyz,,,
+2026-06-23T06:21:42.309579Z,,,,,,,,,,,Scrape error: Failed to fetch https://erc-8004.quicknode.com/networks/mantle-mainnet after 3 retries; RPC error: Could not connect to any Mantle RPC endpoint
