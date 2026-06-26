@@ -134,3 +134,18 @@ timestamp,network_slug,network_name,agents,feedback,validations,last_indexed_blo
 2026-06-25T07:09:33.072953Z,polygon-mainnet,Polygon Mainnet,557,193,Coming Soon,89110898,137
 2026-06-25T07:09:33.072953Z,scroll-mainnet,Scroll Mainnet,108,0,Coming Soon,34181522,534352
 2026-06-25T07:09:33.072953Z,soneium-mainnet,Soneium Mainnet,0,0,Coming Soon,24618294,1868
+2026-06-26T06:43:31.474932Z,abstract-mainnet,Abstract Mainnet,1074,292,Coming Soon,71914278,2741
+2026-06-26T06:43:31.474932Z,arbitrum-mainnet,Arbitrum One,1131,107,Coming Soon,477456621,42161
+2026-06-26T06:43:31.474932Z,avalanche-mainnet,Avalanche C-Chain,1771,14374,Coming Soon,88835099,43114
+2026-06-26T06:43:31.474932Z,base-mainnet,Base Mainnet,57039,302485,Coming Soon,47833418,8453
+2026-06-26T06:43:31.474932Z,bnb-mainnet,BNB Chain Mainnet,145851,29493,Coming Soon,106439222,56
+2026-06-26T06:43:31.474932Z,celo-mainnet,Celo Mainnet,9599,24663,Coming Soon,70555436,42220
+2026-06-26T06:43:31.474932Z,ethereum-mainnet,Ethereum Mainnet,35436,3180,Coming Soon,25400075,1
+2026-06-26T06:43:31.474932Z,gnosis-mainnet,Gnosis Mainnet,3786,4341,Coming Soon,46890715,100
+2026-06-26T06:43:31.474932Z,linea-mainnet,Linea Mainnet,115,31,Coming Soon,31165207,59144
+2026-06-26T06:43:31.474932Z,mantle-mainnet,Mantle Mainnet,141,1641,Coming Soon,97162932,5000
+2026-06-26T06:43:31.474932Z,monad-mainnet,Monad Mainnet,8791,9101,Coming Soon,83764439,143
+2026-06-26T06:43:31.474932Z,optimism-mainnet,OP Mainnet,516,30,Coming Soon,153428694,10
+2026-06-26T06:43:31.474932Z,polygon-mainnet,Polygon Mainnet,557,193,Coming Soon,89167451,137
+2026-06-26T06:43:31.474932Z,scroll-mainnet,Scroll Mainnet,108,0,Coming Soon,34193345,534352
+2026-06-26T06:43:31.474932Z,soneium-mainnet,Soneium Mainnet,0,0,Coming Soon,24660711,1868
