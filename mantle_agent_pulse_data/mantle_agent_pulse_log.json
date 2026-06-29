@@ -180,5 +180,19 @@
     "onchain_agent_count": null,
     "indexer_vs_onchain_diff": null,
     "notes": "Scrape error: Failed to fetch https://erc-8004.quicknode.com/networks/mantle-mainnet after 3 retries; RPC error: Could not connect to any Mantle RPC endpoint"
+  },
+  {
+    "timestamp": "2026-06-29T06:11:19.722794Z",
+    "agents": 142,
+    "feedback": 1650,
+    "validations": "Coming Soon",
+    "last_indexed_block": 97291569,
+    "chain_head_block": 97291584,
+    "identity_registry_deployed": true,
+    "reputation_registry_deployed": true,
+    "rpc_endpoint": "https://rpc.mantle.xyz",
+    "onchain_agent_count": null,
+    "indexer_vs_onchain_diff": null,
+    "notes": ""
   }
 ]
