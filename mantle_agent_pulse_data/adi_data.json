@@ -3,27 +3,27 @@
     "network_slug": "celo-mainnet",
     "network_name": "Celo Mainnet",
     "defillama_name": "Celo",
-    "agents": 9599,
-    "tvl_usd": 18482321.83743886,
-    "adi": 519.3611541032529,
+    "agents": 9641,
+    "tvl_usd": 18781744.555277206,
+    "adi": 513.3175979273511,
     "error": null
   },
   {
     "network_slug": "bnb-mainnet",
     "network_name": "BNB Chain Mainnet",
     "defillama_name": "BSC",
-    "agents": 145851,
-    "tvl_usd": 4942243296.74232,
-    "adi": 29.511092684598854,
+    "agents": 152464,
+    "tvl_usd": 4858663210.692176,
+    "adi": 31.379824735429573,
     "error": null
   },
   {
     "network_slug": "base-mainnet",
     "network_name": "Base Mainnet",
     "defillama_name": "Base",
-    "agents": 57039,
-    "tvl_usd": 4034769704.298157,
-    "adi": 14.136866334462045,
+    "agents": 57552,
+    "tvl_usd": 4094655368.506432,
+    "adi": 14.055395343562868,
     "error": null
   },
   {
@@ -31,26 +31,26 @@
     "network_name": "Avalanche C-Chain",
     "defillama_name": "Avalanche",
     "agents": 1771,
-    "tvl_usd": 453948791.69838387,
-    "adi": 3.901321101382513,
-    "error": null
-  },
-  {
-    "network_slug": "ethereum-mainnet",
-    "network_name": "Ethereum Mainnet",
-    "defillama_name": "Ethereum",
-    "agents": 35436,
-    "tvl_usd": 36862314801.737854,
-    "adi": 0.9613069659512915,
+    "tvl_usd": 469306702.07011247,
+    "adi": 3.773651627364614,
     "error": null
   },
   {
     "network_slug": "mantle-mainnet",
     "network_name": "Mantle Mainnet",
     "defillama_name": "Mantle",
-    "agents": 141,
-    "tvl_usd": 147806747.45239282,
-    "adi": 0.9539483307107803,
+    "agents": 142,
+    "tvl_usd": 147384601.73742634,
+    "adi": 0.9634656424487322,
+    "error": null
+  },
+  {
+    "network_slug": "ethereum-mainnet",
+    "network_name": "Ethereum Mainnet",
+    "defillama_name": "Ethereum",
+    "agents": 35756,
+    "tvl_usd": 37350762421.18301,
+    "adi": 0.9573030825127532,
     "error": null
   }
 ]
