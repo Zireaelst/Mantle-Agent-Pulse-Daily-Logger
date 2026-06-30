@@ -13,3 +13,4 @@ timestamp,agents,feedback,validations,last_indexed_block,chain_head_block,identi
 2026-06-27T06:45:36.843383Z,,,,,,,,,,,Scrape error: Failed to fetch https://erc-8004.quicknode.com/networks/mantle-mainnet after 3 retries; RPC error: Could not connect to any Mantle RPC endpoint
 2026-06-28T06:07:59.662746Z,,,,,,,,,,,Scrape error: Failed to fetch https://erc-8004.quicknode.com/networks/mantle-mainnet after 3 retries; RPC error: Could not connect to any Mantle RPC endpoint
 2026-06-29T06:11:19.722794Z,142,1650,Coming Soon,97291569,97291584,True,True,https://rpc.mantle.xyz,,,
+2026-06-30T06:00:03.348399Z,142,1654,Coming Soon,97334427,97334446,True,True,https://rpc.mantle.xyz,,,
