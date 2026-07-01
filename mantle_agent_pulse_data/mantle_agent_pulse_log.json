@@ -208,5 +208,19 @@
     "onchain_agent_count": null,
     "indexer_vs_onchain_diff": null,
     "notes": ""
+  },
+  {
+    "timestamp": "2026-07-01T06:00:02.676100Z",
+    "agents": 142,
+    "feedback": 1657,
+    "validations": "Coming Soon",
+    "last_indexed_block": 97377628,
+    "chain_head_block": 97377646,
+    "identity_registry_deployed": true,
+    "reputation_registry_deployed": true,
+    "rpc_endpoint": "https://rpc.mantle.xyz",
+    "onchain_agent_count": null,
+    "indexer_vs_onchain_diff": null,
+    "notes": ""
   }
 ]
